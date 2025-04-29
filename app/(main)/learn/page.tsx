@@ -17,6 +17,7 @@ const LearnPage = () => {
       </StickyWrapper>
       <FeedWrapper>
         <Header title="Investment" />
+
       </FeedWrapper>
     </div>
   );

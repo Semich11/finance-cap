@@ -19,7 +19,7 @@ export const UserProgress = ({
 }: Props) => {
     return(
         <div>
-            <Link href="/">
+            <Link href="/courses">
                 <Button variant="ghost">
                     <Image 
                         src={activeCourse.imageSrc}
