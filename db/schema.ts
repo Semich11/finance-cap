@@ -7,6 +7,14 @@ export const courses = pgTable("courses", {
   imageSrc: text("image_src").notNull(),
 });
 
+export const units = pgTable("units", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  courseId: integer("course_id").references(() => courses.id, {onDelete: "cascade"}).notNull(),
+  order: integer("order").notNull(),
+});
+
 export const coursesRelations = relations(courses, ({ many }) => ({
   userProgress: many(userProgress),
 }));
