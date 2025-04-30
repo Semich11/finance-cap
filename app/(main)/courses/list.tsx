@@ -9,48 +9,45 @@ import { upsertUserProgress } from "@/actions/user-progress";
 import { error } from "console";
 
 type Props = {
-    courses: typeof courses.$inferSelect[];
-    activeCourseId?: typeof userProgress.$inferSelect.activeCourseId;
-}
+  courses: (typeof courses.$inferSelect)[];
+  activeCourseId?: typeof userProgress.$inferSelect.activeCourseId;
+};
 
-export const List = ({
-    courses,
-    activeCourseId
-}:Props) => {
+export const List = ({ courses, activeCourseId }: Props) => {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
 
-    const router = useRouter();
-    const [pending, startTransition] = useTransition();
+  const onClick = (id: number) => {
+    if (pending) return;
 
-    const onClick = (id: number) => {
-        if (pending) return;
-
-        if (id === activeCourseId){
-            return router.push("/learn");
-        }
-        startTransition(async () => {
-            try {
-              await upsertUserProgress(id);
-            } catch (err: any) {
-              if (!err.message?.includes("NEXT_REDIRECT")) {
-                toast.error("Something went wrong.");
-              }
-            }
-          });
+    if (id === activeCourseId) {
+      return router.push("/learn");
     }
+    startTransition(async () => {
+      try {
+        await upsertUserProgress(id);
+      } catch (err: any) {
+        // Ignore redirect signal (which appears as an error)
+        if (!err.message?.includes("NEXT_REDIRECT")) {
+          toast.error("Something went wrong.");
+        }
+      }
+    });
+  };
 
-    return(
-        <div className="pt-6 grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-4 ">
-            {courses.map((course) => (
-                <Card
-                    key={course.id}
-                    id={course.id}
-                    title={course.title}
-                    imgSrc={course.imgSrc}
-                    onClick={onClick}
-                    disableb={pending}
-                    active={course.id === activeCourseId}
-                />
-            ))}
-        </div>
-    )
-}
+  return (
+    <div className="pt-6 grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-4 ">
+      {courses.map((course) => (
+        <Card
+          key={course.id}
+          id={course.id}
+          title={course.title}
+          imageSrc={course.imageSrc}
+          onClick={onClick}
+          disableb={pending}
+          active={course.id === activeCourseId}
+        />
+      ))}
+    </div>
+  );
+};

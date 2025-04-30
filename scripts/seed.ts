@@ -19,22 +19,22 @@ const main = async () => {
             {
                 id: 1,
                 title: "Investment",
-                imgSrc: "/target.svg"
+                imageSrc: "/target.svg"
             },
             {
                 id: 2,
                 title: "Mortgage",
-                imgSrc: "/target.svg"
+                imageSrc: "/main_medal.svg"
             },
             {
                 id: 3,
                 title: "Loan",
-                imgSrc: "/target.svg"
+                imageSrc: "/target.svg"
             },
             {
                 id: 4,
                 title: "Dividen",
-                imgSrc: "/target.svg"
+                imageSrc: "/target.svg"
             },
         ]);
 
