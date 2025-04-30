@@ -30,9 +30,7 @@ export const List = ({
         startTransition(async () => {
             try {
               await upsertUserProgress(id);
-              // no need to manually navigate — redirect handles it
             } catch (err: any) {
-              // Ignore redirect signal (which appears as an error)
               if (!err.message?.includes("NEXT_REDIRECT")) {
                 toast.error("Something went wrong.");
               }
