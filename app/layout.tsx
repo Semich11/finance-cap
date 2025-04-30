@@ -9,6 +9,7 @@ import {
   // SignedOut,
   // UserButton,
 } from '@clerk/nextjs'
+import { Toaster } from "@/components/ui/sonner";
 
 const font = Nunito({
   variable: "--font-geist-sans",
@@ -34,9 +35,9 @@ export default function RootLayout({
     <ClerkProvider>
         <html lang="en">
         <body
-          className={`${font.variable} antialiased`}
-          >
+          className={`${font.variable} antialiased`}>
           {children}
+          <Toaster/>
         </body>
       </html> 
     </ClerkProvider>
