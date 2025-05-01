@@ -1,0 +1,7 @@
+ npx drizzle-kit push // formerly (npm run db:push) {push schema to database to create or update the table in the database}
+
+
+ npm run db:seed    //{push seed script to database}
+
+
+ npm run db:studio   //{run and open Drizzle studio locally}
