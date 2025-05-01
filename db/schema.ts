@@ -52,11 +52,12 @@ export const challenges = pgTable("challenges", {
   question: text("question").notNull(),
 });
 
-export const challengesRelations = relations(challenges, ({ one }) => ({
+export const challengesRelations = relations(challenges, ({ one, many }) => ({
   lesson: one(lessons, {
     fields: [challenges.lessonId],
     references: [lessons.id],
   }),
+  challengeOptions: many(challengeOptions),
 }));
 
 export const challengeOptions = pgTable("challengeOptions", {
