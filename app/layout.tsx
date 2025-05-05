@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import {Nunito} from "next/font/google";
-import "./globals.css";
 import {
   ClerkProvider,
-  // SignInButton,
-  // SignUpButton,
-  // SignedIn,
-  // SignedOut,
-  // UserButton,
 } from '@clerk/nextjs'
 import { Toaster } from "@/components/ui/sonner";
+import { ExitModal } from "@/components/modals/exit-modal";
+import "./globals.css";
 
 const font = Nunito({
   variable: "--font-geist-sans",
@@ -36,8 +32,9 @@ export default function RootLayout({
         <html lang="en">
         <body
           className={`${font.variable} antialiased`}>
-          {children}
           <Toaster/>
+          <ExitModal/>
+          {children}
         </body>
       </html> 
     </ClerkProvider>
