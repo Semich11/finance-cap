@@ -60,6 +60,36 @@ const main = async () => {
                 order: 1,
                 title: "What is Investing and Why It Matters",
             },
+            {
+                id: 2,
+                unitId: 1,
+                order: 2,
+                title: "Understanding Risk and Return",
+            },
+            {
+                id: 3,
+                unitId: 1,
+                order: 3,
+                title: "Understanding Risk and Return",
+            },
+            {
+                id: 4,
+                unitId: 1,
+                order: 4,
+                title: "Understanding Risk and Return",
+            },
+            {
+                id: 5,
+                unitId: 1,
+                order: 5,
+                title: "Understanding Risk and Return",
+            },
+            {
+                id: 6,
+                unitId: 1,
+                order: 6,
+                title: "Understanding Risk and Return",
+            },
         ]);
 
         await db.insert(schema.challenges).values([
@@ -102,7 +132,7 @@ const main = async () => {
         console.log("Seeding finish");
     } catch(error){
         console.error(error);
-        throw new Error("Failed to see the datababe")
+        throw new Error("Failed to seed the database")
     }
 }
 
