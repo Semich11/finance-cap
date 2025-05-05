@@ -1,26 +1,39 @@
-// "use client"
+"use client"
 
-// import { challengeOptions, challenges } from "@/db/schema";
+import { challengeOptions, challenges } from "@/db/schema";
+import { Percent } from "lucide-react";
+import { useState } from "react";
+import { Header } from "./header";
 
-// type Props = {
-//     initialLessonId: number;
-//     initialHearts: number;
-//     initialPercentage: number;
-//     userSubscription: any;
-//     initialLessonChallenges: (typeof challenges.$inferSelect & {
-//         completed: boolean,
-//         challengeOption: typeof challengeOptions.$inferSelect[];
-//     })[];
-// }
+type Props = {
+    initialPercentage: number;
+    initialHearts: number;
+    initialLessonId: number;
+    initialLessonChallenges: (typeof challenges.$inferSelect & {
+        completed: boolean,
+        challengeOptions: typeof challengeOptions.$inferSelect[];
+    })[];
+    userSubscription: any;
+}
 
-// export const Quiz = ({
-//     initialLessonId,
-//     initialHearts,
-//     initialPercentage,
-//     userSubscription,
-//     initialLessonChallenges,
-// }:Props) => {
-//     return(
-//         <div>Quiz</div>
-//     )
-// }
+export const Quiz = ({
+    initialPercentage,
+    initialHearts,
+    initialLessonId,
+    initialLessonChallenges,
+    userSubscription,
+}:Props) => {
+
+    const [hearts, setHeart] = useState(initialHearts);
+    const [percentage, setPercentage] = useState(initialPercentage);
+
+    return(
+        <>
+            <Header
+                hearts={hearts}
+                percentage={percentage}
+                hasActiveSubscription={!!userSubscription?.isActive}
+            />
+        </>
+    )
+}
