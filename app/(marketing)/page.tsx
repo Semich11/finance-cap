@@ -33,7 +33,7 @@ return(
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <Button size="lg" variant="secondary" className="w-full" asChild>
+            <Button size="lg" variant="secondary" className="text-black w-full" asChild>
               <Link href="/learn">
                 Continue Learning
               </Link>

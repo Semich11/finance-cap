@@ -3,8 +3,10 @@
 
  npm run db:seed    //{push seed script to database}
 
+ npm run db:reset    //{reset/clear the database}
 
- npm run db:studio   //{run and open Drizzle studio locally}
+
+ npm run db:st udio   //{run and open Drizzle studio locally}
 
  //        locked: "bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4",
 
