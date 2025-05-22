@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Check, Crown, Star } from "lucide-react";
+import { Crown, Star } from "lucide-react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -12,19 +12,14 @@ type Props = {
     id: number,
     index: number,
     totalCount: number,
-    locked?: boolean,
-    current?: boolean,
-    percentage: number
 };
 
 export const LessonButton = ({
     id,
     index,
     totalCount,
-    locked,
-    current,
-    percentage,
 }:Props) => {
+    const current = true;
     const cycleLength = 8;
     const cycleIndex = index % cycleLength;
 
@@ -44,23 +39,18 @@ export const LessonButton = ({
 
     const isFirst = index === 0;
     const isLast = index === totalCount;
-    const isCompleted = !current && !locked;
-
-    const Icon = isCompleted ? Check : isLast ? Crown : Star;
-
-    const href = isCompleted ? `/lesson/${id}` : "/lesson";
+    const Icon = isLast? Crown : Star;
+    const href = `/lesson/${id}`;
 
     return(
         <Link 
             href={href} 
-            aria-disabled={locked} 
-            style={{ pointerEvents: locked ? "none" : "auto"}}
          >
             <div 
                 className="relative"
                 style={{
                     right: `${rightPosition}px`,
-                    marginTop: isFirst && !isCompleted ? 60 : 24,
+                    marginTop: isFirst && true?  24 : 60,
                 }}
             >
                 {current ? (
@@ -71,7 +61,8 @@ export const LessonButton = ({
                     </div>
                 
                     <CircularProgressbarWithChildren
-                        value={Number.isNaN(percentage) ? 0 : percentage}
+                        
+                        value={0}
                         styles={{
                             path: { stroke: "#4ade80" },
                             trail: { stroke: "#e5e7eb" }
@@ -79,14 +70,14 @@ export const LessonButton = ({
                     >
                         <Button 
                             size="rounded"
-                            variant={locked ? "locked" : "secondary"}
+                            variant={"secondary"}
                             className="h-[70px] w-[70px] border-b-8"
                         >
                             <Icon
                                 className={cn(
                                     "h-10 w-10",
-                                    locked ? "fill-neutral-400 text-neutral-400 stroke-neutral-400": "fill-primary-foreground text-primary-foreground",
-                                    isCompleted && "fill-none stroke[4]"
+                                    true ? "fill-neutral-400 text-neutral-400 stroke-neutral-400": "fill-primary-foreground text-primary-foreground",
+                                    false && "fill-none stroke[4]"
                                 )}
                             />
                         </Button>
@@ -95,20 +86,21 @@ export const LessonButton = ({
                 
                 ) : (
                     <Button 
-                            size="rounded"
-                            variant={locked ? "locked" : "secondary"}
-                            className="h-[70px] w-[70px] border-b-8"
-                        >
-                            <Icon
-                                className={cn(
-                                    "h-10 w-10",
-                                    locked ? "fill-neutral-400 text-neutral-400 stroke-neutral-400": "fill-primary-foreground text-primary-foreground",
-                                    isCompleted && "fill-none stroke[4]"
-                                )}
-                            />
-                        </Button>
+                        size="rounded"
+                        variant={"locked"}
+                        className="h-[70px] w-[70px] border-b-8"
+                    >
+                        <Icon
+                            className={cn(
+                                "h-10 w-10",
+                                false ? "fill-neutral-400 text-neutral-400 stroke-neutral-400": "fill-primary-foreground text-primary-foreground",
+                                false && "fill-none stroke[4]"
+                            )}
+                        />
+                    </Button>
                 )}
             </div>
         </Link>
     )
 }
+

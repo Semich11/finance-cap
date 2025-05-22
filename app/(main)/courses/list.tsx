@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { courses, userProgress } from "@/db/schema";
 import { Card } from "./card";
 import { upsertUserProgress } from "@/actions/user-progress";
-import { error } from "console";
 
 type Props = {
   courses: (typeof courses.$inferSelect)[];
@@ -26,9 +25,8 @@ export const List = ({ courses, activeCourseId }: Props) => {
     startTransition(async () => {
       try {
         await upsertUserProgress(id);
-      } catch (err: any) {
-        // Ignore redirect signal (which appears as an error)
-        if (!err.message?.includes("NEXT_REDIRECT")) {
+      } catch (err) {
+        if (err instanceof Error && !err.message?.includes("NEXT_REDIRECT")) {
           toast.error("Something went wrong.");
         }
       }

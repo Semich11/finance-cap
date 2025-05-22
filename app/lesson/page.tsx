@@ -1,49 +1,26 @@
+import { getTopics, getUserProgress } from "@/db/queries";
 import { redirect } from "next/navigation";
 
-import { getLesson, getUserProgress } from "@/db/queries";
-import { Quiz } from "./quiz";
-
 const LessonPage = async () => {
-    const lessonData =  getLesson();
+    const topicData =  getTopics();
     const userProgressData =  getUserProgress();
 
     const [
-        lesson,
-        userProgress
+    topic,
+    userProgress
     ] = await Promise.all([
-        lessonData,
+        topicData,
         userProgressData,
     ])
 
-    if (!lesson || !userProgress){
-        redirect("/learn");
-    }
+if (!topic || !userProgress){
+    redirect("/learn");
+}
 
-    const initialPercentage = lesson.challenges
-    .filter((challenge) => challenge.completed)
-    .length / lesson.challenges.length * 100;
-    return(
-        
+    return(  
         <div>
-             <Quiz
-                initialLessonId={lesson.id}
-                initialLessonChallenges={lesson.challenges}
-                initialHearts={userProgress.hearts}
-                initialPercentage={initialPercentage}
-                userSubscription={null}
-            />
         </div>
     )
 }
 
 export default LessonPage;
-
-// const LessonPage = () => {
-//     return(
-//         <div>
-//             LessonPage
-//         </div>
-//     )
-// }
-
-// export default LessonPage;

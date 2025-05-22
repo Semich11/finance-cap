@@ -24,7 +24,7 @@ export const Card = ({
       onClick={() => onClick(id)}
       className={cn(
         "h-full border-2 rounded-xl border-b-4 hover:bg-black/5 cursor-pointer active:border-b-2 flex flex-col items-center justify-between p-3 pb-6 min-h-[217px] min-w-[200px]",
-        disableb && "pointer-evens-none opacity-50"
+        disableb && "pointer-events-none opacity-50"
       )}
     >
       <div className="flex w-full min-[24px] items-center justify-end">
